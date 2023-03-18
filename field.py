@@ -8,8 +8,8 @@ class Field(Sprite):
         super().__init__()
         self.image = pygame.image.load("field_cell.bmp")
         self.rect = self.image.get_rect()
-        self.rect.x = 10+x_pos
-        self.rect.y = 10+y_pos
+        self.rect.x = 5+x_pos
+        self.rect.y = 5+y_pos
 
 
 
