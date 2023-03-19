@@ -10,6 +10,8 @@ class Field(Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 5+x_pos
         self.rect.y = 5+y_pos
+        self.filling = False
+
 
 
 
