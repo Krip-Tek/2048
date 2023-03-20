@@ -15,10 +15,10 @@ class Cell(Sprite):
 
     def move_cell(self, side):
         if side == "left":
-            pass
+            print("left")
         elif side == "right":
-            pass
+            print("right")
         elif side == "up":
-            pass
+            print("up")
         elif side == "down":
-            pass
+            print("down")
