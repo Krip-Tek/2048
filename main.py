@@ -12,7 +12,9 @@ pygame.init()
 WIDTH = 425
 HEIGHT = 425
 
-2
+max_step = 320
+min_step = 5
+
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  # (ширина, высота)
 pygame.display.set_caption("2048")
 icon = pygame.image.load("2048.png")
@@ -22,8 +24,8 @@ screen.fill("#7179C2")
 field_cells = Group()
 cells = Group()
 
-cell = Cell(screen, random.randrange(5, round(WIDTH)-26, 105), random.randrange(5, round(HEIGHT) - 26, 105), 2)
-cells.add(cell)
+# cell = Cell(screen, random.randrange(5, round(WIDTH)-26, 105), random.randrange(5, round(HEIGHT) - 26, 105), 2)
+# cells.add(cell)
 
 
 def cell_spawn(field_cells):
@@ -47,9 +49,25 @@ def field_cell_init():
 def control():
     #* Функция управления игрой.
     #* Сдержит алгоритм соединения либо движения ячеек
-
-
     pass
+
+
+def move_all_cell(teg, cells, field_cells):
+    step_len = 0
+    for cell in cells:
+        if teg == "up":
+            cell_pos = cell.get_pos()
+            step_len = cell_pos[1] - 5
+        elif teg == "down":
+            cell_pos = cell.get_pos()
+            step_len = 320 - cell_pos[1]
+        elif teg == "right":
+            cell_pos = cell.get_pos()
+            step_len = 320 - cell_pos[0]
+        elif teg == "left":
+            cell_pos = cell.get_pos()
+            step_len = cell_pos[0] - 5
+        cell.move_cell(teg, step_len)
 
 
 field_cell_init()
@@ -63,17 +81,19 @@ while True:
         if events.type == pygame.KEYDOWN:
             if events.key == pygame.K_w:
                 cell_spawn(field_cells)
-                cell.move_cell("up")
+                move_all_cell("up", cells, field_cells)
             elif events.key == pygame.K_s:
                 cell_spawn(field_cells)
-                cell.move_cell("down")
+                move_all_cell("down", cells, field_cells)
             elif events.key == pygame.K_a:
                 cell_spawn(field_cells)
-                cell.move_cell("left")
+                move_all_cell("left", cells, field_cells)
             elif events.key == pygame.K_d:
                 cell_spawn(field_cells)
-                cell.move_cell("right")
+                move_all_cell("right", cells, field_cells)
 
+
+    field_cells.draw(screen)
     cells.draw(screen)
 
     pygame.display.update()

@@ -13,12 +13,15 @@ class Cell(Sprite):
 
         self.num_cell = n_cell
 
-    def move_cell(self, side):
+    def move_cell(self, side, step_len):
         if side == "left":
-            print("left")
+            self.rect.x -= step_len
         elif side == "right":
-            print("right")
+            self.rect.x += step_len
         elif side == "up":
-            print("up")
+            self.rect.y -= step_len
         elif side == "down":
-            print("down")
+            self.rect.y += step_len
+
+    def get_pos(self):
+        return self.rect.x, self.rect.y
